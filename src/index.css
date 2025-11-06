@@ -1,0 +1,162 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/forms";
+
+/* Forzar estrategia por clase para la variante `dark:` en Tailwind v4 */
+@custom-variant dark (&:where(.dark &));
+
+@theme {
+  --font-display: 'Alex Brush', cursive;
+  --font-body: 'Alex Brush', cursive;
+  --color-primary-500: #5e6cad;
+  --color-gold: #d4af37;
+  --color-blush: #f6d7d4;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply text-neutral-800 antialiased;
+  /* Fondo con gradientes suaves y sutiles "blobs" */
+  background:
+    radial-gradient(1200px 1200px at -10% -20%, color-mix(in oklab, var(--color-blush) 50%, #d9d4cf) 0%, transparent 45%),
+    radial-gradient(900px 900px at 110% 0%, color-mix(in oklab, var(--color-gold) 18%, #d9d5e3) 0%, transparent 50%),
+    radial-gradient(1100px 1100px at 50% 120%, color-mix(in oklab, var(--color-primary-500) 14%, #d7d3e8) 0%, transparent 50%),
+    linear-gradient(180deg, #e0dbe8 0%, #d3cfdf 100%);
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-color: #d8d3e0;
+}
+
+/* Variantes globales para modo oscuro */
+.dark body {
+  @apply text-slate-200 antialiased;
+  background:
+    radial-gradient(1200px 1200px at -10% -20%, color-mix(in oklab, #0f172a 70%, #1e293b) 0%, transparent 45%),
+    radial-gradient(900px 900px at 110% 0%, color-mix(in oklab, #1e293b 60%, #0b1220) 0%, transparent 50%),
+    radial-gradient(1100px 1100px at 50% 120%, color-mix(in oklab, #111827 60%, #0b1220) 0%, transparent 50%),
+    linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-color: #0b1220;
+}
+
+/* Animaciones personalizadas mejoradas */
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes float-1 {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+  33% { transform: translateY(-10px) translateX(5px); opacity: 0.7; }
+  66% { transform: translateY(5px) translateX(-3px); opacity: 0.5; }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.4; }
+  50% { transform: translateY(-15px) translateX(-8px); opacity: 0.8; }
+}
+
+@keyframes float-3 {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
+  25% { transform: translateY(-8px) translateX(3px); opacity: 0.6; }
+  75% { transform: translateY(8px) translateX(-5px); opacity: 0.4; }
+}
+
+/* Nuevas animaciones modernas */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-float-1 {
+  animation: float-1 6s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: float-2 8s ease-in-out infinite;
+}
+
+.animate-float-3 {
+  animation: float-3 7s ease-in-out infinite;
+}
+
+/* Nuevas clases de animación */
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
