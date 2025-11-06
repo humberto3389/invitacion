@@ -572,7 +572,7 @@ export default function LandingPage() {
           <div className="border-t border-slate-700 mt-12 pt-8 text-center text-slate-400 text-sm">
             <p>
               &copy; {new Date().getFullYear()} Suspiro Nupcial. 
-              <span className="text-gold ml-2">Hecho con 💕 para tu día especial</span>
+              <span className="text-gold ml-2">Hecho con 💕 corazonpara tu día especial</span>
             </p>
           </div>
         </div>
