@@ -6,6 +6,66 @@ import ContactForm from '../components/ContactForm';
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '584121234567';
 const WHATSAPP_MESSAGE = 'Hola! Me interesa contratar un sitio web para mi boda. Podrian brindarme mas informacion sobre los planes disponibles?';
 
+// Componente de partículas de nieve
+const SnowParticle = ({ index }: { index: number }) => {
+  // 40% de probabilidad de ser una partícula grande y brillante
+  const isLarge = Math.random() < 0.4;
+  // Partículas más grandes en general
+  const size = isLarge ? Math.random() * 6 + 4 : Math.random() * 4 + 2;
+  const startX = Math.random() * 100;
+  const startY = Math.random() * 100;
+  // Movimiento más lento para mejor visibilidad
+  const duration = Math.random() * 5 + (isLarge ? 10 : 7);
+  const delay = Math.random() * -10;
+  const swayAmount = Math.random() * 40 + (isLarge ? 25 : 15);
+  // Más brillo y opacidad para todas las partículas
+  const opacity = isLarge ? 1 : Math.random() * 0.3 + 0.7;
+
+  return (
+    <motion.div
+      className="absolute pointer-events-none"
+      style={{
+        width: size + 'px',
+        height: size + 'px',
+        borderRadius: '50%',
+        backgroundColor: `rgba(255, 255, 255, ${opacity})`,
+        boxShadow: isLarge 
+          ? '0 0 15px 2px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 215, 0, 0.5)'
+          : '0 0 10px rgba(255, 255, 255, 0.7), 0 0 3px rgba(255, 215, 0, 0.3)',
+        left: `${startX}%`,
+        top: `${startY}%`,
+        filter: `blur(${isLarge ? 0.3 : 0.7}px)`,
+        zIndex: Math.round(size),
+      }}
+      animate={{
+        y: [`${startY}%`, `${startY + 200}%`],
+        x: [0, swayAmount, -swayAmount, 0],
+        scale: isLarge ? [1, 1.2, 1] : [1, 1.1, 1],
+      }}
+      transition={{
+        y: {
+          duration: duration,
+          repeat: Infinity,
+          ease: "linear",
+          delay: delay,
+        },
+        x: {
+          duration: duration * 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: delay,
+        },
+        scale: {
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: delay,
+        }
+      }}
+    />
+  );
+};
+
 export default function LandingPage() {
   const [selectedPlan, setSelectedPlan] = useState<'basic' | 'premium' | 'deluxe' | null>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -73,12 +133,20 @@ export default function LandingPage() {
           <div className="flex items-center justify-between h-16">
             <motion.a 
               href="/" 
-              className="text-2xl font-serif text-slate-800 tracking-tight"
+              className="text-2xl font-serif text-white tracking-tight"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               Suspiro<span className="text-gold">Nupcial</span>
             </motion.a>
+
+            {/* Contenedor de partículas de nieve */}
+            <div className="absolute inset-0 overflow-hidden">
+              {/* Capa única de partículas más brillantes */}
+              {Array.from({ length: window.innerWidth < 768 ? 15 : 40 }).map((_, i) => (
+                <SnowParticle key={i} index={i} />
+              ))}
+            </div>
             
             <div className="hidden md:flex items-center space-x-8">
               {['Servicios', 'Planes', 'Contacto'].map((item, index) => (
