@@ -9,6 +9,16 @@ const WHATSAPP_MESSAGE = 'Hola! Me interesa contratar un sitio web para mi boda.
 export default function LandingPage() {
   const [selectedPlan, setSelectedPlan] = useState<'basic' | 'premium' | 'deluxe' | null>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [isDark, setIsDark] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleDark = () => {
+    setIsDark(prev => {
+      const next = !prev;
+      localStorage.setItem('site-dark', next ? '1' : '0');
+      return next;
+    });
+  };
 
   const getWhatsAppUrl = () => {
     const cleanNumber = WHATSAPP_NUMBER.replace(/[\s\-\(\)]/g, '');
