@@ -66,7 +66,7 @@ const SnowParticle = ({ index }: { index: number }) => {
   );
 };
 
-export default function LandingPage() {
+export default function MasterAdmin() {
   const [selectedPlan, setSelectedPlan] = useState<'basic' | 'premium' | 'deluxe' | null>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [isDark, setIsDark] = useState(false);
